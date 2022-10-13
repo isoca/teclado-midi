@@ -1,6 +1,14 @@
 
-function tocaSom (idElementAudio) {
-    document.querySelector(idElementAudio).play();
+function tocaSom (seletorAudio) {
+    const elemento = document.querySelector(seletorAudio);
+
+    if (elemento && elemento.localName === 'audio') {
+        elemento.play();
+    }
+    else {
+        //alert
+        console.log('Elemento não foi encontrado ou o seletor não é válido')
+    }
 }
 
 const listaDeTeclas = document.querySelectorAll('.tecla');
@@ -33,7 +41,21 @@ for (let contador = 0; contador < listaDeTeclas.length; contador++) { // contado
     const instrumento = tecla.classList[1];
     const idAudio = `#som_${instrumento}` // template string
 
+    // toca o som no click
     tecla.onclick = function () {  
         tocaSom(idAudio);
     };
+
+    // deixa vermelho quando aperta enter ou space
+    tecla.onkeydown = function (evento) { 
+        console.log(evento)
+        if (evento.code === 'Enter' || evento.code === 'Space'){
+            tecla.classList.add('ativa');
+        }
+    }
+
+    // tira o vermelho quando para de apertar qualquer botão
+    tecla.onkeyup = function () { 
+        tecla.classList.remove('ativa');
+    }
 }
