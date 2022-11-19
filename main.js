@@ -1,4 +1,5 @@
 
+// Main JS
 function tocaSom (seletorAudio) {
     const elemento = document.querySelector(seletorAudio);
 
